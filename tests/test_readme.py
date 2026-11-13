@@ -87,3 +87,10 @@ def test_license_file_and_readme_split_code_and_cis_data():
     # The CIS-derived data is NOT MIT: both files stay CC BY-NC-SA 4.0.
     assert "corpus/cis_v8.yaml" in t and "tests/fixtures/mini_cis.yaml" in t
     assert "CC BY-NC-SA 4.0" in t
+
+
+def test_license_is_unmodified_mit_text_so_github_detects_it():
+    # Extra text in LICENSE makes GitHub label the repo "Other"; the CIS
+    # exception lives in the README, corpus/SOURCES.md and the file headers.
+    lic = (ROOT / "LICENSE").read_text(encoding="utf-8")
+    assert lic.rstrip().endswith("OTHER DEALINGS IN THE\nSOFTWARE.")
