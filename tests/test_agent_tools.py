@@ -38,7 +38,8 @@ def fake_vector_search(monkeypatch):
         calls.append({"query": query, "framework": framework, "limit": limit})
         rows = [_c("CIS", "CIS-5", "Account Management", "Manage accounts.", 0.51),
                 _c("NIST", "AC-2", "Account Management", "Manage accounts.", 0.45),
-                _c("ISO", "A.8.2", "Privileged access rights", "Limit privilege.", 0.34),
+                # above the 0.35 default map_min_similarity
+                _c("ISO", "A.8.2", "Privileged access rights", "Limit privilege.", 0.40),
                 _c("ISO", "A.5.24", "Incident planning", "Plan for incidents.", 0.12)]
         return [c for c in rows if framework is None or c.framework == framework]
 
