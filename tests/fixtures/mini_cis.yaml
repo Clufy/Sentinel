@@ -1,0 +1,14 @@
+# Mini corpus (CIS part). Adapted (paraphrased) from CIS Critical Security
+# Controls v8 (c) Center for Internet Security, Inc., licensed under
+# CC BY-NC-SA 4.0 https://creativecommons.org/licenses/by-nc-sa/4.0/
+# This fixture is therefore distributed under CC BY-NC-SA 4.0.
+# For the most up-to-date guidance refer to https://www.cisecurity.org/controls/
+framework: CIS
+controls:
+  - {control_id: "CIS-1", title: "Inventory and Control of Enterprise Assets", summary: "Keep a current list of every device that connects to the enterprise network and can hold or handle data, and deal with unknown devices.", source_url: "https://www.cisecurity.org/controls/v8"}
+  - {control_id: "CIS-2", title: "Inventory and Control of Software Assets", summary: "Track the software installed across your devices, confirm it is authorized and supported, and remove or block anything that is not.", source_url: "https://www.cisecurity.org/controls/v8"}
+  - {control_id: "CIS-4", title: "Secure Configuration of Enterprise Assets and Software", summary: "Define hardened settings for devices and applications, document the process, and keep systems aligned with those settings.", source_url: "https://www.cisecurity.org/controls/v8"}
+  - {control_id: "CIS-5", title: "Account Management", summary: "Know every user, administrator, and service account in the environment, and manage each account from creation through deactivation.", source_url: "https://www.cisecurity.org/controls/v8"}
+  - {control_id: "CIS-6", title: "Access Control Management", summary: "Follow a repeatable process for giving and withdrawing permissions to assets and data as people join, move, or leave.", source_url: "https://www.cisecurity.org/controls/v8"}
+  - {control_id: "CIS-7", title: "Continuous Vulnerability Management", summary: "Run an ongoing cycle of scanning for weaknesses, ranking them, and fixing them across the environment.", source_url: "https://www.cisecurity.org/controls/v8"}
+  - {control_id: "CIS-8", title: "Audit Log Management", summary: "Gather, retain, and review activity logs from systems so that attacks and misuse can be detected and investigated.", source_url: "https://www.cisecurity.org/controls/v8"}

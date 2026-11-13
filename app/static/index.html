@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sentinel — Grounded Compliance Q&A</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: system-ui, sans-serif; max-width: 760px; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; }
+    h1 { font-size: 1.4rem; }
+    textarea { width: 100%; min-height: 4rem; font: inherit; padding: .5rem; box-sizing: border-box; }
+    .row { display: flex; gap: .5rem; align-items: center; margin: .5rem 0; }
+    select, button { font: inherit; padding: .4rem .6rem; }
+    button { cursor: pointer; }
+    #answer { white-space: pre-wrap; border: 1px solid #8884; border-radius: 6px; padding: 1rem; min-height: 3rem; margin-top: 1rem; }
+    #answer.refusal { border-color: #c0392b; color: #c0392b; }
+    #citations { margin-top: 1rem; }
+    #citations li { font-family: ui-monospace, monospace; }
+    .muted { opacity: .6; font-size: .85rem; }
+  </style>
+</head>
+<body>
+  <h1>Sentinel</h1>
+  <p class="muted">Grounded governance &amp; compliance Q&amp;A. Not legal advice.</p>
+
+  <textarea id="question" placeholder="e.g. What controls govern account management?"></textarea>
+  <div class="row">
+    <label for="framework">Framework:</label>
+    <select id="framework">
+      <option value="">All</option>
+      <option value="NIST">NIST</option>
+      <option value="ISO">ISO</option>
+      <option value="CIS">CIS</option>
+    </select>
+    <button id="ask">Ask</button>
+  </div>
+
+  <div id="answer" aria-live="polite"></div>
+  <div id="citations"></div>
+
+  <script>
+    const askBtn = document.getElementById("ask");
+    const answerEl = document.getElementById("answer");
+    const citationsEl = document.getElementById("citations");
+    const citeRe = /\[(NIST|ISO|CIS)\s+[A-Za-z0-9.\-]+\]/g;
+
+    function renderCitations(text) {
+      const found = [...new Set(text.match(citeRe) || [])];
+      citationsEl.innerHTML = found.length
+        ? "<strong>Citations</strong><ul>" + found.map((c) => "<li>" + c + "</li>").join("") + "</ul>"
+        : "";
+    }
+
+    async function ask() {
+      const question = document.getElementById("question").value.trim();
+      const framework = document.getElementById("framework").value || null;
+      if (!question) return;
+      askBtn.disabled = true;
+      answerEl.className = "";
+      answerEl.textContent = "";
+      citationsEl.innerHTML = "";
+      let full = "";
+      try {
+        const resp = await fetch("/query", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ question, framework }),
+        });
+        if (!resp.ok || !resp.body) {
+          answerEl.className = "refusal";
+          answerEl.textContent = "Request failed: HTTP " + resp.status;
+          return;
+        }
+        const reader = resp.body.getReader();
+        const decoder = new TextDecoder();
+        let buf = "";
+        while (true) {
+          const { value, done } = await reader.read();
+          if (done) break;
+          buf += decoder.decode(value, { stream: true });
+          let m;
+          while ((m = /\r?\n\r?\n/.exec(buf)) !== null) {
+            const frame = buf.slice(0, m.index);
+            buf = buf.slice(m.index + m[0].length);
+            let evt = "message";
+            let data = "";
+            for (const line of frame.split(/\r?\n/)) {
+              if (line.startsWith("event:")) evt = line.slice(6).trim();
+              else if (line.startsWith("data:")) data += line.slice(5).replace(/^ /, "");
+            }
+            if (evt === "token") {
+              try { full += JSON.parse(data).text; } catch (e) { full += data; }
+              answerEl.textContent = full;
+            } else if (evt === "citations") {
+              try { renderCitations((JSON.parse(data).citations || []).map((c) => "[" + c + "]").join(" ")); } catch (e) {}
+            } else if (evt === "refusal") {
+              answerEl.className = "refusal";
+              try { answerEl.textContent = JSON.parse(data).message; } catch (e) { answerEl.textContent = data; }
+            } else if (evt === "done") {
+              renderCitations(full);
+            }
+          }
+        }
+      } catch (err) {
+        answerEl.className = "refusal";
+        answerEl.textContent = "Error: " + err.message;
+      } finally {
+        askBtn.disabled = false;
+      }
+    }
+
+    askBtn.addEventListener("click", ask);
+    document.getElementById("question").addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) ask();
+    });
+  </script>
+</body>
+</html>

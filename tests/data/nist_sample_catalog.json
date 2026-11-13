@@ -1,0 +1,60 @@
+{
+  "catalog": {
+    "groups": [
+      {
+        "id": "ac",
+        "title": "Access Control",
+        "controls": [
+          {
+            "id": "ac-2",
+            "title": "Account Management",
+            "params": [
+              {"id": "ac-02_odp.01", "label": "prerequisites and criteria"},
+              {"id": "ac-02_odp.02", "select": {"how-many": "one-or-more", "choice": ["disable", "remove"]}}
+            ],
+            "props": [{"name": "label", "value": "AC-02"}],
+            "parts": [
+              {
+                "name": "statement",
+                "prose": "Manage system accounts, including:",
+                "parts": [
+                  {"name": "item", "prose": "Defining account types;"},
+                  {"name": "item", "prose": "Assigning account managers."},
+                  {"name": "item", "prose": "Requiring {{ insert: param, ac-02_odp.01 }} for group membership;"},
+                  {"name": "item", "prose": "Choosing to {{ insert: param, ac-02_odp.02 }} unused accounts within {{ insert: param, ac-02_odp.99 }};"}
+                ]
+              }
+            ],
+            "controls": [
+              {
+                "id": "ac-2.1",
+                "title": "Automated System Account Management",
+                "params": [{"id": "ac-02.01_odp", "label": "automated mechanisms"}],
+                "parts": [
+                  {"name": "statement", "prose": "Support account management using {{ insert: param, ac-02.01_odp }} and {{insert: param, ac-02_odp.01}}."}
+                ]
+              },
+              {
+                "id": "ac-2.10",
+                "title": "Shared and Group Account Credential Change",
+                "props": [
+                  {"name": "label", "value": "AC-02(10)"},
+                  {"name": "status", "value": "withdrawn"}
+                ],
+                "links": [{"href": "#ac-2.k", "rel": "incorporated-into"}]
+              }
+            ]
+          },
+          {
+            "id": "ac-13",
+            "title": "Supervision and Review - Access Control",
+            "props": [
+              {"name": "label", "value": "AC-13"},
+              {"name": "status", "value": "Withdrawn"}
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

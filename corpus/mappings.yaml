@@ -1,0 +1,57 @@
+# Cross-framework control equivalences.
+# by_control: lookup map consumed by app.agent.load_mappings (FW:id -> equivalents).
+# crosswalk:  vetted rows; also consumed by load_mappings, which expands each row
+#             into pairwise cross-framework links merged after by_control.
+by_control:
+  "NIST:AC-2":
+    - {framework: "ISO", control_id: "A.5.15"}
+    - {framework: "ISO", control_id: "A.5.16"}
+    - {framework: "CIS", control_id: "CIS-5"}
+  "ISO:A.5.15":
+    - {framework: "NIST", control_id: "AC-2"}
+    - {framework: "CIS", control_id: "CIS-6"}
+  "ISO:A.5.16":
+    - {framework: "NIST", control_id: "AC-2"}
+  "CIS:CIS-5":
+    - {framework: "NIST", control_id: "AC-2"}
+    - {framework: "ISO", control_id: "A.5.16"}
+  "NIST:AU-2":
+    - {framework: "ISO", control_id: "A.8.15"}
+    - {framework: "CIS", control_id: "CIS-8"}
+  "ISO:A.8.15":
+    - {framework: "NIST", control_id: "AU-2"}
+    - {framework: "CIS", control_id: "CIS-8"}
+  "CIS:CIS-8":
+    - {framework: "NIST", control_id: "AU-2"}
+    - {framework: "ISO", control_id: "A.8.15"}
+crosswalk:
+  - iso: ["A.5.9"]
+    nist: ["CM-8"]
+    cis: ["CIS-1", "CIS-2"]
+  - iso: ["A.8.2", "A.8.18"]
+    nist: ["AC-6"]
+    cis: ["CIS-5", "CIS-6"]
+  - iso: ["A.5.15", "A.5.18"]
+    nist: ["AC-2", "AC-3"]
+    cis: ["CIS-6"]
+  - iso: ["A.8.15", "A.8.16"]
+    nist: ["AU-2", "AU-6", "AU-12"]
+    cis: ["CIS-8"]
+  - iso: ["A.8.7"]
+    nist: ["SI-3"]
+    cis: ["CIS-10"]
+  - iso: ["A.8.8"]
+    nist: ["RA-5"]
+    cis: ["CIS-7"]
+  - iso: ["A.8.13"]
+    nist: ["CP-9"]
+    cis: ["CIS-11"]
+  - iso: ["A.5.24", "A.5.26"]
+    nist: ["IR-4"]
+    cis: ["CIS-17"]
+  - iso: ["A.6.3"]
+    nist: ["AT-2"]
+    cis: ["CIS-14"]
+  - iso: ["A.5.19", "A.5.20"]
+    nist: ["SR-3", "SA-9"]
+    cis: ["CIS-15"]

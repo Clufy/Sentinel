@@ -1,0 +1,902 @@
+# CIS Critical Security Controls v8 (c) Center for Internet Security, Inc.
+# Source: CIS Controls v8, licensed under CC BY-NC-SA 4.0
+#   https://creativecommons.org/licenses/by-nc-sa/4.0/
+# The summaries below are ADAPTED (paraphrased) from that work. This file
+# (cis_v8.yaml) is therefore distributed under CC BY-NC-SA 4.0
+# (attribution, non-commercial, share-alike).
+# For the most up-to-date guidance refer to https://www.cisecurity.org/controls/
+# 18 top-level controls (CIS-1..CIS-18) plus their safeguards (CIS-n.m).
+framework: CIS
+controls:
+  # ---- CIS-1: Inventory and Control of Enterprise Assets (5 safeguards) ----
+  - control_id: "CIS-1"
+    title: "Inventory and Control of Enterprise Assets"
+    summary: >-
+      Actively manage all enterprise assets connected to the infrastructure so
+      the organization knows what must be monitored and protected and can find
+      unauthorized or unmanaged devices.
+  - control_id: "CIS-1.1"
+    title: "Establish and maintain detailed enterprise asset inventory"
+    summary: >-
+      Keep an accurate, regularly updated inventory of all enterprise assets with
+      the potential to store or process data, recording enough detail to identify
+      each one.
+  - control_id: "CIS-1.2"
+    title: "Address unauthorized assets"
+    summary: >-
+      Maintain a process to deal with assets that are not authorized, whether by
+      removing them, denying network access, or bringing them under management.
+  - control_id: "CIS-1.3"
+    title: "Utilize an active discovery tool"
+    summary: >-
+      Use a tool that actively discovers connected assets and updates the
+      inventory automatically.
+  - control_id: "CIS-1.4"
+    title: "Use DHCP logging to update enterprise asset inventory"
+    summary: >-
+      Draw on DHCP logging or IP address management data to keep the asset
+      inventory current.
+  - control_id: "CIS-1.5"
+    title: "Use a passive asset discovery tool"
+    summary: >-
+      Deploy passive discovery to detect assets from network traffic and feed the
+      inventory.
+
+  # ---- CIS-2: Inventory and Control of Software Assets (7 safeguards) ----
+  - control_id: "CIS-2"
+    title: "Inventory and Control of Software Assets"
+    summary: >-
+      Maintain visibility over installed software so that only authorized
+      applications run and unmanaged software is detected and remediated.
+  - control_id: "CIS-2.1"
+    title: "Establish and maintain a software inventory"
+    summary: >-
+      Keep a current list of all software authorized to run on enterprise assets,
+      including version and supporting details.
+  - control_id: "CIS-2.2"
+    title: "Ensure authorized software is currently supported"
+    summary: >-
+      Review the software list periodically and remove or flag titles that the
+      vendor no longer supports, since they will not receive security fixes.
+  - control_id: "CIS-2.3"
+    title: "Address unauthorized software"
+    summary: >-
+      Investigate software found running that is not on the authorized list and
+      either remove it or add it to the inventory after review.
+  - control_id: "CIS-2.4"
+    title: "Utilize automated software inventory tools"
+    summary: >-
+      Use tooling that automatically documents installed applications across the
+      fleet to keep the inventory accurate without manual effort.
+  - control_id: "CIS-2.5"
+    title: "Allowlist authorized software"
+    summary: >-
+      Configure systems to permit execution only of software explicitly approved
+      by the organization.
+  - control_id: "CIS-2.6"
+    title: "Allowlist authorized libraries"
+    summary: >-
+      Extend execution allowlisting to shared libraries such as .dll or .so files
+      so unapproved code modules cannot load.
+  - control_id: "CIS-2.7"
+    title: "Allowlist authorized scripts"
+    summary: >-
+      Restrict which scripts (such as shell or PowerShell scripts) are permitted
+      to run, blocking anything not explicitly approved.
+
+  # ---- CIS-3: Data Protection (14 safeguards) ----
+  - control_id: "CIS-3"
+    title: "Data Protection"
+    summary: >-
+      Identify, classify, and safeguard data throughout its lifecycle so
+      sensitive information is not exposed, altered, or destroyed inappropriately.
+  - control_id: "CIS-3.1"
+    title: "Establish and maintain a data management process"
+    summary: >-
+      Document how the organization handles data from creation through disposal,
+      covering ownership, classification, and retention.
+  - control_id: "CIS-3.2"
+    title: "Establish and maintain a data inventory"
+    summary: >-
+      Build a catalog of data assets and the systems that store or process them
+      so protection efforts can be targeted correctly.
+  - control_id: "CIS-3.3"
+    title: "Configure data access control lists"
+    summary: >-
+      Restrict access to data based on a documented need, granting permissions
+      only where a legitimate business reason exists.
+  - control_id: "CIS-3.4"
+    title: "Enforce data retention"
+    summary: >-
+      Apply retention rules aligned with the data management process so
+      information is kept only as long as needed.
+  - control_id: "CIS-3.5"
+    title: "Securely dispose of data"
+    summary: >-
+      Destroy or sanitize data once it is no longer required, following the
+      disposal requirements set for that data type.
+  - control_id: "CIS-3.6"
+    title: "Encrypt data on end-user devices"
+    summary: >-
+      Protect data at rest on laptops, workstations, and mobile devices using
+      full-disk or equivalent encryption.
+  - control_id: "CIS-3.7"
+    title: "Establish and maintain a data classification scheme"
+    summary: >-
+      Define categories such as sensitive, internal, or public so data can be
+      handled according to its risk level.
+  - control_id: "CIS-3.8"
+    title: "Document data flows"
+    summary: >-
+      Map how data moves between systems, networks, and third parties so
+      protection controls cover every transit path.
+  - control_id: "CIS-3.9"
+    title: "Encrypt data on removable media"
+    summary: >-
+      Require encryption for data written to USB drives and other removable
+      storage to limit exposure if the media is lost.
+  - control_id: "CIS-3.10"
+    title: "Encrypt sensitive data in transit"
+    summary: >-
+      Protect sensitive data as it traverses networks using encrypted
+      communication channels.
+  - control_id: "CIS-3.11"
+    title: "Encrypt sensitive data at rest"
+    summary: >-
+      Apply encryption to sensitive data stored on servers, databases, and other
+      repositories, not only end-user devices.
+  - control_id: "CIS-3.12"
+    title: "Segment data processing and storage based on sensitivity"
+    summary: >-
+      Separate networks or systems that handle sensitive data from those that do
+      not, reducing the blast radius of a compromise.
+  - control_id: "CIS-3.13"
+    title: "Deploy a data loss prevention solution"
+    summary: >-
+      Use automated tooling to spot sensitive data wherever it is stored,
+      processed, or sent, and to stop or flag it leaving through channels the
+      organization has not approved.
+  - control_id: "CIS-3.14"
+    title: "Log sensitive data access"
+    summary: >-
+      Record who reads, changes, or deletes sensitive data so misuse can be
+      noticed and an investigation can reconstruct what happened.
+
+  # ---- CIS-4: Secure Configuration of Enterprise Assets and Software (12 safeguards) ----
+  - control_id: "CIS-4"
+    title: "Secure Configuration of Enterprise Assets and Software"
+    summary: >-
+      Establish and maintain hardened configurations for devices and applications
+      so default, insecure settings are not left exposed.
+  - control_id: "CIS-4.1"
+    title: "Establish and maintain a secure configuration process"
+    summary: >-
+      Define a repeatable process for hardening enterprise assets before and
+      during their operational life.
+  - control_id: "CIS-4.2"
+    title: "Establish and maintain a secure configuration process for network infrastructure"
+    summary: >-
+      Apply the same hardening discipline to routers, switches, and firewalls as
+      to endpoints and servers.
+  - control_id: "CIS-4.3"
+    title: "Configure automatic session locking on enterprise assets"
+    summary: >-
+      Set devices to lock automatically after a period of inactivity to limit
+      exposure from unattended sessions.
+  - control_id: "CIS-4.4"
+    title: "Implement and manage a firewall on servers"
+    summary: >-
+      Enable host-based firewalls on servers and configure them to permit only
+      necessary traffic.
+  - control_id: "CIS-4.5"
+    title: "Implement and manage a firewall on end-user devices"
+    summary: >-
+      Enable host-based firewalls on workstations and laptops with a default-deny
+      posture for inbound connections.
+  - control_id: "CIS-4.6"
+    title: "Securely manage enterprise assets and software"
+    summary: >-
+      Perform administration of assets over encrypted, authenticated management
+      channels rather than plaintext protocols.
+  - control_id: "CIS-4.7"
+    title: "Manage default accounts on enterprise assets and software"
+    summary: >-
+      Disable, rename, or otherwise secure default accounts that ship with
+      operating systems and applications.
+  - control_id: "CIS-4.8"
+    title: "Uninstall or disable unnecessary services on enterprise assets and software"
+    summary: >-
+      Turn off services and features that are not required for business
+      operation to shrink the attack surface.
+  - control_id: "CIS-4.9"
+    title: "Configure trusted DNS servers on enterprise assets"
+    summary: >-
+      Point devices to organization-approved DNS resolvers to reduce exposure to
+      malicious redirection.
+  - control_id: "CIS-4.10"
+    title: "Enforce automatic device lockout on portable end-user devices"
+    summary: >-
+      Configure mobile and portable devices to lock or wipe automatically after
+      repeated failed authentication attempts.
+  - control_id: "CIS-4.11"
+    title: "Enforce remote wipe capability on portable end-user devices"
+    summary: >-
+      Ensure lost or stolen portable devices can be wiped remotely to protect any
+      data they hold.
+  - control_id: "CIS-4.12"
+    title: "Separate enterprise workspaces on mobile end-user devices"
+    summary: >-
+      Use containerization or profiles to keep business applications and data
+      isolated from personal use on mobile devices.
+
+  # ---- CIS-5: Account Management (6 safeguards) ----
+  - control_id: "CIS-5"
+    title: "Account Management"
+    summary: >-
+      Use processes and tools to assign and manage authorization for user,
+      administrator, and service accounts across enterprise assets and software.
+  - control_id: "CIS-5.1"
+    title: "Establish and maintain an inventory of accounts"
+    summary: >-
+      Keep a record of every account with access to enterprise systems, including
+      its owner and purpose.
+  - control_id: "CIS-5.2"
+    title: "Use unique passwords"
+    summary: >-
+      Require that each account use a password that is not reused across other
+      systems or accounts.
+  - control_id: "CIS-5.3"
+    title: "Disable dormant accounts"
+    summary: >-
+      Identify accounts that have not been used for an extended period and
+      disable them until a business need reactivates them.
+  - control_id: "CIS-5.4"
+    title: "Restrict administrator privileges to dedicated administrator accounts"
+    summary: >-
+      Keep day-to-day activity on standard accounts and reserve privileged
+      accounts strictly for administrative tasks.
+  - control_id: "CIS-5.5"
+    title: "Establish and maintain an inventory of service accounts"
+    summary: >-
+      Track accounts used by applications and services separately, recording
+      their owner and intended scope.
+  - control_id: "CIS-5.6"
+    title: "Centralize account management"
+    summary: >-
+      Administer accounts through a centralized directory or identity platform
+      rather than scattered local stores.
+
+  # ---- CIS-6: Access Control Management (8 safeguards) ----
+  - control_id: "CIS-6"
+    title: "Access Control Management"
+    summary: >-
+      Use processes and tools to create, assign, manage, and revoke access
+      credentials and privileges for users, administrators, and service accounts.
+  - control_id: "CIS-6.1"
+    title: "Establish an access granting process"
+    summary: >-
+      Define a documented process for granting access when a new hire joins or an
+      employee changes role.
+  - control_id: "CIS-6.2"
+    title: "Establish an access revoking process"
+    summary: >-
+      Define a documented process for promptly removing access when someone
+      leaves or no longer needs it.
+  - control_id: "CIS-6.3"
+    title: "Require MFA for externally exposed applications"
+    summary: >-
+      Enforce multi-factor authentication for applications reachable from outside
+      the organization's network.
+  - control_id: "CIS-6.4"
+    title: "Require MFA for remote network access"
+    summary: >-
+      Enforce multi-factor authentication for VPN and other remote access into
+      the enterprise network.
+  - control_id: "CIS-6.5"
+    title: "Require MFA for administrative access"
+    summary: >-
+      Enforce multi-factor authentication whenever an account is used to perform
+      administrative actions.
+  - control_id: "CIS-6.6"
+    title: "Establish and maintain an inventory of authentication and authorization systems"
+    summary: >-
+      Track the identity providers and access control systems in use so their
+      configuration and coverage can be reviewed.
+  - control_id: "CIS-6.7"
+    title: "Centralize access control"
+    summary: >-
+      Manage authentication and authorization through a centralized platform to
+      keep policy enforcement consistent.
+  - control_id: "CIS-6.8"
+    title: "Define and maintain role-based access control"
+    summary: >-
+      Assign privileges according to defined job roles rather than granting
+      access on an ad hoc basis.
+
+  # ---- CIS-7: Continuous Vulnerability Management (7 safeguards) ----
+  - control_id: "CIS-7"
+    title: "Continuous Vulnerability Management"
+    summary: >-
+      Continuously assess and track vulnerabilities across the environment to
+      remediate weaknesses before attackers can exploit them.
+  - control_id: "CIS-7.1"
+    title: "Establish and maintain a vulnerability management process"
+    summary: >-
+      Document a repeatable process covering how vulnerabilities are identified,
+      prioritized, and closed out.
+  - control_id: "CIS-7.2"
+    title: "Establish and maintain a remediation process"
+    summary: >-
+      Define how discovered weaknesses are tracked to resolution, including
+      ownership and target timelines.
+  - control_id: "CIS-7.3"
+    title: "Perform automated operating system patch management"
+    summary: >-
+      Apply operating system security updates on an automated, recurring
+      schedule instead of relying on manual effort.
+  - control_id: "CIS-7.4"
+    title: "Perform automated application patch management"
+    summary: >-
+      Apply application-level security updates automatically so third-party
+      software stays current.
+  - control_id: "CIS-7.5"
+    title: "Perform automated vulnerability scans of internal enterprise assets"
+    summary: >-
+      Regularly scan internal systems for known weaknesses using an authenticated
+      scanning tool.
+  - control_id: "CIS-7.6"
+    title: "Perform automated vulnerability scans of externally exposed enterprise assets"
+    summary: >-
+      Regularly scan internet-facing systems to catch exposures visible to
+      outside attackers.
+  - control_id: "CIS-7.7"
+    title: "Remediate detected vulnerabilities"
+    summary: >-
+      Fix vulnerabilities found through scanning or other assessment according to
+      the priority set by the remediation process.
+
+  # ---- CIS-8: Audit Log Management (12 safeguards) ----
+  - control_id: "CIS-8"
+    title: "Audit Log Management"
+    summary: >-
+      Collect, review, and retain activity logs so security events can be
+      detected, understood, and investigated after the fact.
+  - control_id: "CIS-8.1"
+    title: "Establish and maintain an audit log management process"
+    summary: >-
+      Document how logs are generated, stored, and reviewed across the
+      organization's assets.
+  - control_id: "CIS-8.2"
+    title: "Collect audit logs"
+    summary: >-
+      Enable logging on enterprise assets so relevant security-related activity
+      is captured.
+  - control_id: "CIS-8.3"
+    title: "Ensure adequate audit log storage"
+    summary: >-
+      Provision enough storage capacity to retain logs for the period the
+      organization requires.
+  - control_id: "CIS-8.4"
+    title: "Standardize time synchronization"
+    summary: >-
+      Synchronize clocks across systems so timestamps in logs can be correlated
+      accurately during an investigation.
+  - control_id: "CIS-8.5"
+    title: "Collect detailed audit logs"
+    summary: >-
+      Capture sufficient detail in logs, such as source, destination, and user
+      identity, to support meaningful analysis.
+  - control_id: "CIS-8.6"
+    title: "Collect DNS query audit logs"
+    summary: >-
+      Log DNS lookups so malicious domain resolution can be detected and traced.
+  - control_id: "CIS-8.7"
+    title: "Collect URL request audit logs"
+    summary: >-
+      Log web requests to spot connections to malicious or suspicious sites.
+  - control_id: "CIS-8.8"
+    title: "Collect command-line audit logs"
+    summary: >-
+      Record command-line activity on systems to help identify malicious use of
+      built-in tools.
+  - control_id: "CIS-8.9"
+    title: "Centralize audit logs"
+    summary: >-
+      Forward logs from across the environment into a central repository for
+      unified analysis.
+  - control_id: "CIS-8.10"
+    title: "Retain audit logs"
+    summary: >-
+      Keep collected logs for a retention period long enough to support
+      investigations of delayed-discovery incidents.
+  - control_id: "CIS-8.11"
+    title: "Conduct audit log reviews"
+    summary: >-
+      Periodically review logs, whether manually or through automated analytics,
+      to detect anomalies.
+  - control_id: "CIS-8.12"
+    title: "Collect service provider logs"
+    summary: >-
+      Obtain and review logs from third-party service providers that process
+      organizational data or run organizational workloads.
+
+  # ---- CIS-9: Email and Web Browser Protections (7 safeguards) ----
+  - control_id: "CIS-9"
+    title: "Email and Web Browser Protections"
+    summary: >-
+      Improve protections and detections against threats delivered through email
+      and web browsers, since both are common attacker entry points.
+  - control_id: "CIS-9.1"
+    title: "Ensure use of only fully supported browsers and email clients"
+    summary: >-
+      Standardize on browser and email client versions that still receive
+      vendor security updates.
+  - control_id: "CIS-9.2"
+    title: "Use DNS filtering services"
+    summary: >-
+      Block resolution of known malicious domains before a connection to them can
+      be established.
+  - control_id: "CIS-9.3"
+    title: "Maintain and enforce network-based URL filters"
+    summary: >-
+      Filter web traffic at the network layer to block access to categories of
+      risky or malicious sites.
+  - control_id: "CIS-9.4"
+    title: "Restrict unnecessary or unauthorized browser and email client extensions"
+    summary: >-
+      Limit which browser and mail client add-ons users can install to reduce the
+      risk of malicious extensions.
+  - control_id: "CIS-9.5"
+    title: "Implement DMARC"
+    summary: >-
+      Deploy DMARC along with SPF and DKIM so recipient mail systems can verify
+      that inbound mail is not spoofed.
+  - control_id: "CIS-9.6"
+    title: "Block unnecessary file types"
+    summary: >-
+      Prevent email attachments and downloads of file types that carry high risk
+      and no legitimate business need.
+  - control_id: "CIS-9.7"
+    title: "Deploy and maintain email server anti-malware protections"
+    summary: >-
+      Scan inbound and outbound mail at the server level to catch malicious
+      attachments and links before delivery.
+
+  # ---- CIS-10: Malware Defenses (7 safeguards) ----
+  - control_id: "CIS-10"
+    title: "Malware Defenses"
+    summary: >-
+      Prevent or control the installation, spread, and execution of malicious
+      applications, code, and scripts on enterprise assets.
+  - control_id: "CIS-10.1"
+    title: "Deploy and maintain anti-malware software"
+    summary: >-
+      Install anti-malware agents on enterprise assets and keep them updated and
+      running.
+  - control_id: "CIS-10.2"
+    title: "Configure automatic anti-malware signature updates"
+    summary: >-
+      Ensure detection signatures update automatically so new threats are
+      recognized promptly.
+  - control_id: "CIS-10.3"
+    title: "Disable autorun and autoplay for removable media"
+    summary: >-
+      Turn off automatic execution of content from USB drives and other
+      removable media to block a common infection path.
+  - control_id: "CIS-10.4"
+    title: "Configure automatic anti-malware scanning of removable media"
+    summary: >-
+      Have security software automatically scan removable media when it is
+      connected.
+  - control_id: "CIS-10.5"
+    title: "Enable anti-exploitation features"
+    summary: >-
+      Turn on operating system and application features that make common
+      exploitation techniques harder to succeed.
+  - control_id: "CIS-10.6"
+    title: "Centrally manage anti-malware software"
+    summary: >-
+      Administer anti-malware deployments from a central console so coverage and
+      configuration stay consistent.
+  - control_id: "CIS-10.7"
+    title: "Use behavior-based anti-malware software"
+    summary: >-
+      Favor detection engines that analyze behavior rather than relying solely on
+      known-signature matching.
+
+  # ---- CIS-11: Data Recovery (5 safeguards) ----
+  - control_id: "CIS-11"
+    title: "Data Recovery"
+    summary: >-
+      Establish and maintain data recovery practices sufficient to restore
+      enterprise assets to a trusted state after an incident.
+  - control_id: "CIS-11.1"
+    title: "Establish and maintain a data recovery process"
+    summary: >-
+      Document how backups are taken, verified, and restored across the
+      organization's systems.
+  - control_id: "CIS-11.2"
+    title: "Perform automated backups"
+    summary: >-
+      Schedule backups to run automatically rather than depending on manual,
+      easily forgotten steps.
+  - control_id: "CIS-11.3"
+    title: "Protect recovery data"
+    summary: >-
+      Secure backup data with encryption and access controls comparable to the
+      protection of the source data.
+  - control_id: "CIS-11.4"
+    title: "Establish and maintain an isolated instance of recovery data"
+    summary: >-
+      Keep at least one backup copy offline or otherwise isolated so it cannot be
+      reached by the same compromise as production systems.
+  - control_id: "CIS-11.5"
+    title: "Test data recovery"
+    summary: >-
+      Periodically restore from backups to confirm that the recovery process
+      actually works when needed.
+
+  # ---- CIS-12: Network Infrastructure Management (8 safeguards) ----
+  - control_id: "CIS-12"
+    title: "Network Infrastructure Management"
+    summary: >-
+      Establish, implement, and actively manage network devices to prevent
+      attackers from exploiting vulnerable network services and access points.
+  - control_id: "CIS-12.1"
+    title: "Ensure network infrastructure is up to date"
+    summary: >-
+      Keep routers, switches, and firewalls patched and running supported
+      firmware or software versions.
+  - control_id: "CIS-12.2"
+    title: "Establish and maintain a secure network architecture"
+    summary: >-
+      Design the network with segmentation and controlled paths so a compromise
+      in one area is contained.
+  - control_id: "CIS-12.3"
+    title: "Securely manage network infrastructure"
+    summary: >-
+      Administer network devices using encrypted, authenticated protocols and
+      restricted management interfaces.
+  - control_id: "CIS-12.4"
+    title: "Establish and maintain architecture diagrams"
+    summary: >-
+      Keep diagrams of network topology current so staff understand how systems
+      and segments connect.
+  - control_id: "CIS-12.5"
+    title: "Centralize network authentication, authorization, and auditing"
+    summary: >-
+      Route network device access through a central authentication and logging
+      system rather than local accounts.
+  - control_id: "CIS-12.6"
+    title: "Use secure network management and communication protocols"
+    summary: >-
+      Prefer encrypted protocols for managing and communicating with network
+      devices over legacy plaintext options.
+  - control_id: "CIS-12.7"
+    title: "Ensure remote devices utilize a VPN and are connecting to an enterprise's AAA infrastructure"
+    summary: >-
+      Require remote endpoints to connect through a VPN that authenticates
+      against the enterprise's central identity infrastructure.
+  - control_id: "CIS-12.8"
+    title: "Establish and maintain dedicated computing resources for administrative work"
+    summary: >-
+      Reserve separate, hardened systems for performing sensitive administrative
+      tasks, isolated from general-purpose use.
+
+  # ---- CIS-13: Network Monitoring and Defense (11 safeguards) ----
+  - control_id: "CIS-13"
+    title: "Network Monitoring and Defense"
+    summary: >-
+      Operate processes and tools to establish comprehensive network monitoring
+      and defense against security threats across the enterprise.
+  - control_id: "CIS-13.1"
+    title: "Centralize security event alerting"
+    summary: >-
+      Aggregate alerts from across the environment into a central point so
+      analysts have unified visibility.
+  - control_id: "CIS-13.2"
+    title: "Deploy a host-based intrusion detection solution"
+    summary: >-
+      Install host-based sensors that flag suspicious activity occurring on
+      individual endpoints.
+  - control_id: "CIS-13.3"
+    title: "Deploy a network intrusion detection solution"
+    summary: >-
+      Monitor network traffic with sensors that identify known attack patterns
+      and suspicious flows.
+  - control_id: "CIS-13.4"
+    title: "Perform traffic filtering between network segments"
+    summary: >-
+      Filter traffic crossing segment boundaries so only expected communication
+      is allowed between zones.
+  - control_id: "CIS-13.5"
+    title: "Manage access control for remote assets"
+    summary: >-
+      Apply consistent access policies to devices connecting from outside the
+      traditional network perimeter.
+  - control_id: "CIS-13.6"
+    title: "Collect network traffic flow logs"
+    summary: >-
+      Capture flow records describing network conversations to support detection
+      and later investigation.
+  - control_id: "CIS-13.7"
+    title: "Deploy a host-based intrusion prevention solution"
+    summary: >-
+      Use host-based tooling capable of automatically blocking detected malicious
+      behavior, not just alerting on it.
+  - control_id: "CIS-13.8"
+    title: "Deploy a network intrusion prevention solution"
+    summary: >-
+      Use network-based tooling that can actively block traffic matching known
+      malicious patterns.
+  - control_id: "CIS-13.9"
+    title: "Deploy port-level access control"
+    summary: >-
+      Control which devices may connect at the network port or switch level
+      based on authentication or device posture.
+  - control_id: "CIS-13.10"
+    title: "Perform application layer filtering"
+    summary: >-
+      Inspect and filter traffic based on application content rather than only
+      ports and protocols.
+  - control_id: "CIS-13.11"
+    title: "Tune security event alerting thresholds"
+    summary: >-
+      Adjust alert thresholds and rules periodically to reduce noise while still
+      catching genuine threats.
+
+  # ---- CIS-14: Security Awareness and Skills Training (9 safeguards) ----
+  - control_id: "CIS-14"
+    title: "Security Awareness and Skills Training"
+    summary: >-
+      Establish and maintain a program that influences workforce behavior to be
+      security conscious and properly skilled to reduce risk.
+  - control_id: "CIS-14.1"
+    title: "Establish and maintain a security awareness program"
+    summary: >-
+      Run an ongoing program that keeps staff informed about relevant security
+      risks and expected behaviors.
+  - control_id: "CIS-14.2"
+    title: "Train workforce members to recognize social engineering attacks"
+    summary: >-
+      Teach staff to identify phishing, pretexting, and other manipulation
+      tactics used to gain unauthorized access.
+  - control_id: "CIS-14.3"
+    title: "Train workforce members on authentication best practices"
+    summary: >-
+      Educate staff on secure password habits and the value of multi-factor
+      authentication.
+  - control_id: "CIS-14.4"
+    title: "Train workforce on data handling best practices"
+    summary: >-
+      Instruct employees on properly identifying, storing, and transmitting
+      sensitive data.
+  - control_id: "CIS-14.5"
+    title: "Train workforce members on causes of unintentional data exposure"
+    summary: >-
+      Raise awareness of common mistakes, like misdirected email or
+      misconfigured sharing, that leak data accidentally.
+  - control_id: "CIS-14.6"
+    title: "Train workforce members on recognizing and reporting security incidents"
+    summary: >-
+      Prepare staff to notice signs of a possible incident and know how to report
+      it quickly.
+  - control_id: "CIS-14.7"
+    title: "Train workforce on how to identify and report if their enterprise assets are missing security updates"
+    summary: >-
+      Help employees recognize when their devices appear out of date so patching
+      gaps get reported and closed.
+  - control_id: "CIS-14.8"
+    title: "Train workforce on the dangers of connecting to and transmitting enterprise data over insecure networks"
+    summary: >-
+      Warn staff about the risks of using untrusted networks and how to connect
+      safely when remote.
+  - control_id: "CIS-14.9"
+    title: "Conduct role-specific security awareness and skills training"
+    summary: >-
+      Provide additional, targeted training for roles with elevated security
+      responsibilities, such as developers or administrators.
+
+  # ---- CIS-15: Service Provider Management (7 safeguards) ----
+  - control_id: "CIS-15"
+    title: "Service Provider Management"
+    summary: >-
+      Develop a process to evaluate third-party service providers holding
+      sensitive data or responsible for critical platforms and processes.
+  - control_id: "CIS-15.1"
+    title: "Establish and maintain an inventory of service providers"
+    summary: >-
+      Keep a record of every third party with access to organizational data or
+      systems.
+  - control_id: "CIS-15.2"
+    title: "Establish and maintain a service provider management policy"
+    summary: >-
+      Document requirements and expectations that must be met before and during
+      engagement with a service provider.
+  - control_id: "CIS-15.3"
+    title: "Classify service providers"
+    summary: >-
+      Categorize providers by the sensitivity of data or systems they touch so
+      oversight can be scaled accordingly.
+  - control_id: "CIS-15.4"
+    title: "Ensure service provider contracts include security requirements"
+    summary: >-
+      Bake security obligations into contractual language so expectations are
+      enforceable, not just assumed.
+  - control_id: "CIS-15.5"
+    title: "Assess service providers"
+    summary: >-
+      Evaluate providers periodically against the organization's security
+      requirements before and during the relationship.
+  - control_id: "CIS-15.6"
+    title: "Monitor service providers"
+    summary: >-
+      Continue to track a provider's security posture and any incidents
+      throughout the life of the engagement.
+  - control_id: "CIS-15.7"
+    title: "Securely decommission service providers"
+    summary: >-
+      Ensure access and data are properly revoked and returned or destroyed when
+      a provider relationship ends.
+
+  # ---- CIS-16: Application Software Security (14 safeguards) ----
+  - control_id: "CIS-16"
+    title: "Application Software Security"
+    summary: >-
+      Manage the security life cycle of software the organization develops,
+      hosts, or acquires to prevent, detect, and remediate weaknesses.
+  - control_id: "CIS-16.1"
+    title: "Establish and maintain a secure application development process"
+    summary: >-
+      Document practices that build security into the software development life
+      cycle from design onward.
+  - control_id: "CIS-16.2"
+    title: "Establish and maintain a process to accept and address vulnerability reports"
+    summary: >-
+      Provide a channel for researchers and others to report application flaws
+      and a process to act on them.
+  - control_id: "CIS-16.3"
+    title: "Perform root cause analysis on security vulnerabilities"
+    summary: >-
+      Investigate why a vulnerability occurred so the underlying development
+      practice can be corrected, not just the symptom.
+  - control_id: "CIS-16.4"
+    title: "Establish and manage an inventory of third-party software components"
+    summary: >-
+      Track libraries and components used within applications so known flaws in
+      them can be identified.
+  - control_id: "CIS-16.5"
+    title: "Use up-to-date and trusted third-party software components"
+    summary: >-
+      Prefer current, actively maintained libraries over outdated or
+      unmaintained ones when building applications.
+  - control_id: "CIS-16.6"
+    title: "Establish and maintain a severity rating system for application vulnerabilities"
+    summary: >-
+      Define how discovered application flaws are ranked so remediation effort is
+      directed at the most impactful issues first.
+  - control_id: "CIS-16.7"
+    title: "Use standard hardening configuration templates for application infrastructure"
+    summary: >-
+      Build and deploy applications on infrastructure configured against tested,
+      standardized hardening baselines.
+  - control_id: "CIS-16.8"
+    title: "Separate production and non-production systems"
+    summary: >-
+      Keep development and testing environments isolated from production to
+      avoid leaking real data or destabilizing live systems.
+  - control_id: "CIS-16.9"
+    title: "Train developers in application security concepts and secure coding"
+    summary: >-
+      Give developers the knowledge to recognize and avoid common coding flaws
+      that lead to vulnerabilities.
+  - control_id: "CIS-16.10"
+    title: "Apply secure design principles in application architectures"
+    summary: >-
+      Design applications around principles such as least privilege and defense
+      in depth rather than bolting on security afterward.
+  - control_id: "CIS-16.11"
+    title: "Leverage vetted modules or services for application security components"
+    summary: >-
+      Use well-reviewed, established libraries for sensitive functions like
+      authentication instead of writing custom implementations.
+  - control_id: "CIS-16.12"
+    title: "Implement code-level security checks"
+    summary: >-
+      Run static or dynamic analysis tools against code to catch vulnerabilities
+      before release.
+  - control_id: "CIS-16.13"
+    title: "Conduct application penetration testing"
+    summary: >-
+      Test deployed applications with adversarial techniques to find
+      exploitable weaknesses missed by other checks.
+  - control_id: "CIS-16.14"
+    title: "Conduct threat modeling"
+    summary: >-
+      Walk through an application's design before and during development to
+      work out how an attacker could abuse it, so weaknesses are designed out
+      rather than discovered after release.
+
+  # ---- CIS-17: Incident Response Management (9 safeguards) ----
+  - control_id: "CIS-17"
+    title: "Incident Response Management"
+    summary: >-
+      Establish a program to prepare for, detect, and quickly respond to attacks
+      so their impact on the organization is minimized.
+  - control_id: "CIS-17.1"
+    title: "Designate personnel to manage incident handling"
+    summary: >-
+      Assign clear ownership for coordinating the organization's response when a
+      security incident occurs.
+  - control_id: "CIS-17.2"
+    title: "Establish and maintain contact information for reporting security incidents"
+    summary: >-
+      Publish and keep current the channels staff and outsiders use to report
+      suspected incidents.
+  - control_id: "CIS-17.3"
+    title: "Establish and maintain an enterprise process for reporting incidents"
+    summary: >-
+      Define the steps an incident report follows once received, from intake to
+      escalation.
+  - control_id: "CIS-17.4"
+    title: "Establish and maintain an incident response process"
+    summary: >-
+      Document the overall plan describing roles, phases, and actions for
+      handling security incidents.
+  - control_id: "CIS-17.5"
+    title: "Assign key roles and responsibilities"
+    summary: >-
+      Clarify who performs each function, such as communications or technical
+      analysis, during an incident.
+  - control_id: "CIS-17.6"
+    title: "Define mechanisms for communicating during incident response"
+    summary: >-
+      Establish reliable communication paths for the response team that remain
+      usable even if normal systems are affected.
+  - control_id: "CIS-17.7"
+    title: "Conduct routine incident response exercises"
+    summary: >-
+      Run tabletop or simulated exercises periodically to keep the response plan
+      and team ready.
+  - control_id: "CIS-17.8"
+    title: "Conduct post-incident reviews"
+    summary: >-
+      Hold a review after each incident to capture lessons learned and improve
+      future response.
+  - control_id: "CIS-17.9"
+    title: "Establish and maintain security incident thresholds"
+    summary: >-
+      Define criteria for what counts as an incident so events are triaged and
+      escalated consistently.
+
+  # ---- CIS-18: Penetration Testing (5 safeguards) ----
+  - control_id: "CIS-18"
+    title: "Penetration Testing"
+    summary: >-
+      Test the effectiveness of security controls by simulating the actions of
+      an attacker to find and fix exploitable weaknesses.
+  - control_id: "CIS-18.1"
+    title: "Establish and maintain a penetration testing program"
+    summary: >-
+      Define the scope, cadence, and objectives for testing the organization's
+      defenses through simulated attacks.
+  - control_id: "CIS-18.2"
+    title: "Perform periodic external penetration tests"
+    summary: >-
+      Regularly test internet-facing systems to identify exploitable weaknesses
+      visible to an outside attacker.
+  - control_id: "CIS-18.3"
+    title: "Remediate penetration test findings"
+    summary: >-
+      Track and fix weaknesses uncovered during testing according to their
+      assessed risk.
+  - control_id: "CIS-18.4"
+    title: "Validate security measures"
+    summary: >-
+      Confirm that existing security controls actually behave as intended when
+      tested under realistic conditions.
+  - control_id: "CIS-18.5"
+    title: "Perform periodic internal penetration tests"
+    summary: >-
+      Test internal systems and segments to see what an attacker could reach
+      after gaining initial internal access.

@@ -1,0 +1,18 @@
+# Mini corpus for CI + smoke tests (NIST part). One file per framework; see mini_iso.yaml, mini_cis.yaml.
+framework: NIST
+controls:
+  - {control_id: "AC-2", title: "Account Management", summary: "Manage the lifecycle of system accounts: create, enable, modify, disable, and remove them, and assign account managers.", source_url: "https://csrc.nist.gov/pubs/sp/800/53/r5"}
+  - {control_id: "AC-3", title: "Access Enforcement", summary: "Enforce approved authorizations for logical access to information and system resources per access control policy.", source_url: "https://csrc.nist.gov/pubs/sp/800/53/r5"}
+  - {control_id: "AC-6", title: "Least Privilege", summary: "Grant only the access necessary for users to accomplish their assigned organizational tasks.", source_url: "https://csrc.nist.gov/pubs/sp/800/53/r5"}
+  - {control_id: "AU-2", title: "Event Logging", summary: "Identify and select the event types the system logs, coordinated across organizational entities.", source_url: "https://csrc.nist.gov/pubs/sp/800/53/r5"}
+  - {control_id: "AU-3", title: "Content of Audit Records", summary: "Ensure audit records capture what happened, when, where, the source, outcome, and involved identities.", source_url: "https://csrc.nist.gov/pubs/sp/800/53/r5"}
+  - {control_id: "CM-2", title: "Baseline Configuration", summary: "Develop and maintain a current baseline configuration of the system under configuration control.", source_url: "https://csrc.nist.gov/pubs/sp/800/53/r5"}
+  - {control_id: "CM-3", title: "Configuration Change Control", summary: "Determine, document, and control changes to the system through a defined change control process.", source_url: "https://csrc.nist.gov/pubs/sp/800/53/r5"}
+  - {control_id: "CP-2", title: "Contingency Plan", summary: "Develop a contingency plan covering essential missions, recovery objectives, roles, and restoration procedures.", source_url: "https://csrc.nist.gov/pubs/sp/800/53/r5"}
+  - {control_id: "IA-2", title: "Identification and Authentication", summary: "Uniquely identify and authenticate organizational users and associate that identity with their processes.", source_url: "https://csrc.nist.gov/pubs/sp/800/53/r5"}
+  - {control_id: "IR-4", title: "Incident Handling", summary: "Operate an incident handling capability covering preparation, detection, analysis, containment, eradication, and recovery.", source_url: "https://csrc.nist.gov/pubs/sp/800/53/r5"}
+  - {control_id: "SI-2", title: "Flaw Remediation", summary: "Identify, report, and correct system flaws and test updates before installation.", source_url: "https://csrc.nist.gov/pubs/sp/800/53/r5"}
+  - {control_id: "SI-3", title: "Malicious Code Protection", summary: "Implement malicious code protection at entry and exit points to detect and eradicate malicious code.", source_url: "https://csrc.nist.gov/pubs/sp/800/53/r5"}
+  - {control_id: "SC-7", title: "Boundary Protection", summary: "Monitor and control communications at external and key internal managed interfaces of the system.", source_url: "https://csrc.nist.gov/pubs/sp/800/53/r5"}
+  - {control_id: "SC-28", title: "Protection of Information at Rest", summary: "Protect the confidentiality and integrity of information at rest using organizationally defined mechanisms.", source_url: "https://csrc.nist.gov/pubs/sp/800/53/r5"}
+  - {control_id: "AT-2", title: "Literacy Training and Awareness", summary: "Provide security and privacy literacy training to system users as part of ongoing awareness activities.", source_url: "https://csrc.nist.gov/pubs/sp/800/53/r5"}

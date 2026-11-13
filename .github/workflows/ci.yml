@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [build, main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      DATABASE_URL: postgresql://sentinel:sentinel@127.0.0.1:5432/sentinel
+      LLM_PROVIDER: fake
+      LLM_MODEL: llama3.1
+      EMBEDDING_MODEL: sentence-transformers/all-MiniLM-L6-v2
+      OLLAMA_BASE_URL: http://localhost:11434
+      MAX_AGENT_STEPS: "4"
+      MAX_REQUEST_TOKENS: "8000"
+      RETRIEVAL_TOP_K: "8"
+      MIN_RELEVANCE: "0.3"
+      MAX_CHUNK_TOKENS: "512"
+    services:
+      postgres:
+        image: pgvector/pgvector:0.8.0-pg16
+        env:
+          POSTGRES_USER: sentinel
+          POSTGRES_PASSWORD: sentinel
+          POSTGRES_DB: sentinel
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U sentinel"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Sync dependencies
+        run: uv sync --extra dev
+
+      - name: Lint
+        run: uv run ruff check app eval scripts tests
+
+      - name: Apply database schema
+        run: uv run python -m scripts.init_db
+
+      - name: Ingest CI fixture corpus (mini, not full NIST)
+        run: uv run python -m scripts.ingest_fixture
+
+      - name: Run tests (full suite, including corpus guards)
+        run: uv run pytest -q
+
+      - name: Re-ingest fixture corpus (pytest fixtures truncate controls)
+        run: uv run python -m scripts.ingest_fixture
+
+      - name: Run eval harness (FakeProvider, gated)
+        run: LLM_PROVIDER=fake uv run python -m eval.run_eval

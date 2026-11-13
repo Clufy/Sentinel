@@ -1,0 +1,11 @@
+# Mini corpus (ISO part): original paraphrases, not Annex A text.
+framework: ISO
+controls:
+  - {control_id: "A.5.1", title: "Policies for information security", summary: "Write down security policies, get leadership sign-off, share them with staff and relevant parties, and revisit them on a schedule or after major change.", source_url: "https://www.iso.org/standard/27001"}
+  - {control_id: "A.5.15", title: "Access control", summary: "Define who may reach which information and facilities, grounded in business needs and risk, and apply those rules to both physical and logical entry points.", source_url: "https://www.iso.org/standard/27001"}
+  - {control_id: "A.8.2", title: "Privileged access rights", summary: "Keep elevated administrative permissions scarce: grant them through an approval step, track who holds them, and review the list regularly.", source_url: "https://www.iso.org/standard/27001"}
+  - {control_id: "A.8.7", title: "Protection against malware", summary: "Deploy defenses that detect and block malicious software, and back them up with staff education on safe behavior.", source_url: "https://www.iso.org/standard/27001"}
+  - {control_id: "A.8.8", title: "Management of technical vulnerabilities", summary: "Learn about weaknesses in systems and software, judge how exposed you are, and act on them with fixes or compensating measures.", source_url: "https://www.iso.org/standard/27001"}
+  - {control_id: "A.8.13", title: "Information backup", summary: "Take copies of data, software, and system images on an agreed schedule and verify by restore tests that they actually work.", source_url: "https://www.iso.org/standard/27001"}
+  - {control_id: "A.8.15", title: "Logging", summary: "Record user and system activity, faults, and notable events, then protect those logs from tampering and examine them for problems.", source_url: "https://www.iso.org/standard/27001"}
+  - {control_id: "A.5.24", title: "Information security incident management planning", summary: "Prepare ahead for security incidents by agreeing on procedures, assigning roles and responsibilities, and setting up communication channels.", source_url: "https://www.iso.org/standard/27001"}

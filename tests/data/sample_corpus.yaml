@@ -1,0 +1,9 @@
+framework: ISO
+controls:
+  - control_id: a.5.1
+    title: Policies for information security
+    summary: Write down the organisation's security policy and the narrower topic policies that support it.
+    source_url: http://iso.example/a5-1
+  - control_id: a.5.2
+    title: Information security roles and responsibilities
+    summary: Decide who owns each security duty and assign those duties to named people.
