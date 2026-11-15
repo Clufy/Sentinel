@@ -1,3 +1,5 @@
+![Sentinel: AI compliance assistant citing NIST 800-53, ISO 27001 and CIS Controls](.github/assets/banner.gif)
+
 # Sentinel: AI compliance assistant for NIST 800-53, ISO 27001 and CIS Controls
 
 [![CI](https://github.com/Clufy/Sentinel/actions/workflows/ci.yml/badge.svg)](https://github.com/Clufy/Sentinel/actions/workflows/ci.yml)
