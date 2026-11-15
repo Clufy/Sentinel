@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sentinel: AI compliance assistant for NIST 800-53, ISO 27001 and CIS Controls</title>
+<meta name="description" content="Open-source, self-hosted RAG assistant for GRC teams. Ask questions about NIST SP 800-53, ISO/IEC 27001:2022 and CIS Controls v8 and get answers that cite the exact controls, or a refusal.">
+<meta name="author" content="Aquib Haq">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://clufy.github.io/Sentinel/">
+<meta name="theme-color" content="#0d1117">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Aquib Haq">
+<meta property="og:title" content="Sentinel: AI compliance assistant for NIST 800-53, ISO 27001 and CIS Controls">
+<meta property="og:description" content="Open-source, self-hosted RAG assistant for GRC teams. Ask questions about NIST SP 800-53, ISO/IEC 27001:2022 and CIS Controls v8 and get answers that cite the exact controls, or a refusal.">
+<meta property="og:url" content="https://clufy.github.io/Sentinel/">
+<meta property="og:image" content="https://clufy.github.io/Sentinel/og-image.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sentinel: AI compliance assistant for NIST 800-53, ISO 27001 and CIS Controls">
+<meta name="twitter:description" content="Open-source, self-hosted RAG assistant for GRC teams. Ask questions about NIST SP 800-53, ISO/IEC 27001:2022 and CIS Controls v8 and get answers that cite the exact controls, or a refusal.">
+<meta name="twitter:image" content="https://clufy.github.io/Sentinel/og-image.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230d1117'/%3E%3Crect x='3' y='3' width='4' height='26' rx='2' fill='%233fb950'/%3E%3Ctext x='19' y='23' font-family='Arial' font-weight='700' font-size='17' fill='%23e6edf3' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareSourceCode","name":"Sentinel","description":"Open-source, self-hosted RAG assistant for GRC teams. Ask questions about NIST SP 800-53, ISO/IEC 27001:2022 and CIS Controls v8 and get answers that cite the exact controls, or a refusal.","url":"https://clufy.github.io/Sentinel/","codeRepository":"https://github.com/Clufy/Sentinel","programmingLanguage":"Python","license":"https://opensource.org/licenses/MIT","keywords":"GRC, compliance automation, NIST 800-53, ISO 27001, CIS Controls, RAG, pgvector, FastAPI, Ollama","author":{"@type":"Person","name":"Aquib Haq","url":"https://clufy.github.io/","sameAs":["https://github.com/Clufy","https://www.linkedin.com/in/aquib-haq/"]}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Sentinel?","acceptedAnswer":{"@type":"Answer","text":"Sentinel is an open-source, self-hosted API that answers governance, risk and compliance questions about NIST SP 800-53 rev5, ISO/IEC 27001:2022 Annex A and CIS Controls v8, citing the exact controls behind every answer."}},{"@type":"Question","name":"Can Sentinel map an audit finding to controls?","acceptedAnswer":{"@type":"Answer","text":"Yes. POST an audit finding to /map and Sentinel returns the related NIST, ISO and CIS controls, each with a one-sentence rationale, or refuses when nothing is similar enough."}},{"@type":"Question","name":"Which LLMs does Sentinel support?","acceptedAnswer":{"@type":"Answer","text":"It runs on a local model through Ollama by default (llama3.1), or on Anthropic or OpenAI models with an API key."}},{"@type":"Question","name":"Does Sentinel give legal or audit advice?","acceptedAnswer":{"@type":"Answer","text":"No. Sentinel is a research aid that finds and summarizes control text. Always check the published standards before acting."}},{"@type":"Question","name":"Is Sentinel free?","acceptedAnswer":{"@type":"Answer","text":"The source code is MIT licensed. The CIS-derived data stays under CC BY-NC-SA 4.0."}}]}</script>
+<style>
+:root{--bg:#0d1117;--panel:#161b22;--border:#30363d;--fg:#e6edf3;--muted:#8b949e;--soft:#c9d1d9;--acc:#3fb950}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+header.top{border-bottom:1px solid var(--border)}
+header.top .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
+header.top .brand{color:var(--fg);font-weight:700}
+header.top nav a{color:var(--muted);margin-left:22px;font-size:15px}
+.hero{padding:88px 0 56px;background:radial-gradient(700px 360px at 85% -10%,color-mix(in srgb,var(--acc) 28%,transparent),transparent)}
+.eyebrow{font:14px/1 ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--muted);margin:0 0 18px}
+h1{font-size:clamp(34px,5.4vw,58px);line-height:1.08;margin:0 0 20px;letter-spacing:-.02em}
+h2{font-size:30px;margin:0 0 20px;letter-spacing:-.01em}h3{font-size:19px;margin:0 0 8px}
+.lead{font-size:20px;color:var(--soft);max-width:760px;margin:0 0 30px}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:11px 20px;border-radius:8px;border:1px solid var(--border);color:var(--fg);font-weight:600;background:var(--panel)}
+.btn.primary{background:var(--acc);border-color:var(--acc);color:#0d1117}
+.btn:hover{text-decoration:none;filter:brightness(1.1)}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0 0;padding:0;list-style:none}
+.tags li{border:1px solid color-mix(in srgb,var(--acc) 60%,var(--border));border-radius:999px;padding:3px 12px;font-size:14px;color:var(--soft)}
+section{padding:56px 0;border-top:1px solid var(--border)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:22px}
+.card p{margin:0;color:var(--soft);font-size:16px}
+.card .meta{margin-top:14px;font-size:14px;color:var(--muted)}
+ol.steps{padding-left:22px}ol.steps li{margin:0 0 10px;color:var(--soft)}
+pre{background:#010409;border:1px solid var(--border);border-radius:10px;padding:18px;overflow:auto;font:14px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--soft)}
+code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.9em}
+table{width:100%;border-collapse:collapse;font-size:15px}th,td{border-bottom:1px solid var(--border);padding:10px 8px;text-align:left}th{color:var(--muted);font-weight:600}
+details{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin:0 0 10px}
+summary{cursor:pointer;font-weight:600}details p{color:var(--soft);margin:10px 0 0}
+footer{border-top:1px solid var(--border);padding:36px 0 56px;color:var(--muted);font-size:15px}
+footer ul{list-style:none;padding:0;margin:10px 0 0}footer li{margin:4px 0}
+.note{color:var(--muted);font-size:15px}
+.grid.two{grid-template-columns:repeat(auto-fit,minmax(400px,1fr))}
+.card img{width:100%;height:auto;aspect-ratio:2/1;border-radius:8px;display:block;margin:0 0 16px;background:#0d1117;border:1px solid var(--border)}
+img.banner{width:100%;height:auto;aspect-ratio:2/1;border-radius:14px;border:1px solid var(--border);display:block;margin:44px 0 0}
+@media(max-width:520px){.grid.two{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="brand" href="https://clufy.github.io/">Aquib Haq</a><nav><a href="#features">Features</a><a href="#quick-start">Quick start</a><a href="#faq">FAQ</a><a href="https://github.com/Clufy/Sentinel">GitHub</a></nav></div></header>
+<main>
+<div class="hero"><div class="wrap">
+<p class="eyebrow">github.com/Clufy/Sentinel · open source · MIT</p>
+<h1>Sentinel: AI compliance assistant for NIST 800-53, ISO 27001 and CIS Controls</h1>
+<p class="lead">Ask security compliance questions in plain English and get streamed answers that cite the exact controls they come from, such as <code>[NIST AC-2]</code>. When Sentinel finds nothing relevant, it says so instead of guessing.</p>
+<div class="btns"><a class="btn primary" href="https://github.com/Clufy/Sentinel">View on GitHub</a><a class="btn" href="#quick-start">Quick start</a></div>
+<ul class="tags"><li>NIST SP 800-53 rev5</li><li>ISO/IEC 27001:2022 Annex A</li><li>CIS Controls v8</li><li>RAG</li><li>FastAPI</li><li>pgvector</li><li>Ollama</li></ul>
+<img class="banner" src="https://raw.githubusercontent.com/Clufy/Sentinel/main/.github/assets/banner.gif" alt="Sentinel answering a compliance question with cited NIST, ISO and CIS controls" width="1280" height="640">
+</div></div>
+<section id="features"><div class="wrap"><h2>Features</h2>
+<div class="grid"><div class="card"><h3>Cited answers</h3><p>Every claim cites a control, for example [NIST AC-2], [ISO A.5.15] or [CIS CIS-5].</p></div><div class="card"><h3>Refuses instead of guessing</h3><p>Sentinel refuses when nothing relevant is found, and when an answer cites a control it never retrieved.</p></div><div class="card"><h3>Maps audit findings</h3><p>Paste an audit finding and get the related controls in all three frameworks, each with a one-sentence reason.</p></div><div class="card"><h3>Hybrid search</h3><p>Keyword and vector search merged with Reciprocal Rank Fusion, then reranked by a cross-encoder and de-duplicated with MMR.</p></div><div class="card"><h3>Any LLM</h3><p>A local model through Ollama by default, or Anthropic or OpenAI with an API key.</p></div><div class="card"><h3>Measured quality</h3><p>An evaluation suite scores recall, citation correctness, faithfulness and refusals, and fails the build if quality drops.</p></div></div>
+</div></section>
+<section id="how-it-works"><div class="wrap"><h2>How it works</h2>
+<ol class="steps">
+<li><strong>Ingest.</strong> Loads the standards, embeds each control and stores it in Postgres with pgvector.</li>
+<li><strong>Search.</strong> Runs keyword and vector search, merges them with Reciprocal Rank Fusion (k=60), reranks with a cross-encoder and removes near-duplicates with MMR (λ=0.7).</li>
+<li><strong>Answer.</strong> An agent loop lets the LLM call search tools, then write an answer with citations.</li>
+<li><strong>Check.</strong> Refuses if the answer has no citations, or cites a control that no search returned.</li>
+</ol></div></section>
+<section id="quick-start"><div class="wrap"><h2>Quick start</h2>
+<p class="note">Needs Docker with Compose v2 and, for the default local model, <a href="https://ollama.com">Ollama</a>.</p>
+<pre>ollama pull llama3.1
+git clone https://github.com/Clufy/Sentinel.git &amp;&amp; cd Sentinel
+cp .env.example .env
+docker compose up --build
+curl -X POST http://localhost:8000/ingest      # load NIST, ISO and CIS</pre>
+<p>Ask a question (the answer streams as Server-Sent Events):</p>
+<pre>curl -N -X POST http://localhost:8000/query \
+  -H "Content-Type: application/json" \
+  -d '{"question": "What controls govern account management?"}'</pre>
+<p>Map an audit finding:</p>
+<pre>curl -X POST http://localhost:8000/map \
+  -H "Content-Type: application/json" \
+  -d '{"finding_text": "Terminated employees retained active VPN accounts for weeks."}'</pre>
+<p class="note">For this finding Sentinel returns NIST PS-4 (personnel termination), CIS 5.3 (disable dormant accounts) and ISO A.6.5 (responsibilities after leaving).</p>
+</div></section>
+<section id="evaluation"><div class="wrap"><h2>Evaluation results</h2>
+<p class="note">40 questions (5 unanswerable) on a 30-control fixture corpus with a scripted LLM, pgvector 0.8.0 on CPU.</p>
+<table><thead><tr><th>Retrieval</th><th>Recall@8</th><th>Citation correctness</th><th>Faithfulness</th><th>Refusal accuracy</th></tr></thead>
+<tbody><tr><td>Hybrid</td><td>1.000</td><td>0.793</td><td>1.000</td><td>0.975</td></tr>
+<tr><td>Vector-only</td><td>0.857</td><td>0.134</td><td>1.000</td><td>0.825</td></tr></tbody></table>
+</div></section>
+<section id="faq"><div class="wrap"><h2>FAQ</h2><details><summary>What is Sentinel?</summary><p>Sentinel is an open-source, self-hosted API that answers governance, risk and compliance questions about NIST SP 800-53 rev5, ISO/IEC 27001:2022 Annex A and CIS Controls v8, citing the exact controls behind every answer.</p></details><details><summary>Can Sentinel map an audit finding to controls?</summary><p>Yes. POST an audit finding to /map and Sentinel returns the related NIST, ISO and CIS controls, each with a one-sentence rationale, or refuses when nothing is similar enough.</p></details><details><summary>Which LLMs does Sentinel support?</summary><p>It runs on a local model through Ollama by default (llama3.1), or on Anthropic or OpenAI models with an API key.</p></details><details><summary>Does Sentinel give legal or audit advice?</summary><p>No. Sentinel is a research aid that finds and summarizes control text. Always check the published standards before acting.</p></details><details><summary>Is Sentinel free?</summary><p>The source code is MIT licensed. The CIS-derived data stays under CC BY-NC-SA 4.0.</p></details></div></section>
+</main>
+<footer><div class="wrap">
+<p>Built by <a href="https://clufy.github.io/">Aquib Haq</a>, AI and backend engineer in Karachi, Pakistan. <a href="https://github.com/Clufy">GitHub</a> · <a href="https://www.linkedin.com/in/aquib-haq/">LinkedIn</a></p>
+<ul>
+<li><a href="https://clufy.github.io/Sentinel/">Sentinel</a>: AI compliance assistant for NIST 800-53, ISO 27001 and CIS Controls</li>
+<li><a href="https://clufy.github.io/claude-code-gateway/">claude-code-gateway</a>: run Claude Code on any LLM with Cloudflare Workers</li>
+<li><a href="https://clufy.github.io/spanguard/">spanguard</a>: PII/PHI detection and redaction for Python</li>
+<li><a href="https://clufy.github.io/voxbridge/">voxbridge</a>: one Python SDK for Vapi and Retell voice agents</li>
+</ul>
+</div></footer>
+</body>
+</html>
