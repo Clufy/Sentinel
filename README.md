@@ -1,4 +1,4 @@
-# Sentinel
+# Sentinel: AI compliance assistant for NIST 800-53, ISO 27001 and CIS Controls
 
 [![CI](https://github.com/Clufy/Sentinel/actions/workflows/ci.yml/badge.svg)](https://github.com/Clufy/Sentinel/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -7,7 +7,8 @@
 **Ask questions about security compliance standards and get answers that cite
 the exact controls they come from.**
 
-Sentinel is a self-hosted API that answers questions about three security
+Sentinel is a self-hosted, open-source RAG (retrieval-augmented generation) API for
+governance, risk and compliance (GRC) teams. It answers questions about three security
 control frameworks:
 
 - **NIST SP 800-53 rev5**
@@ -34,6 +35,7 @@ When Sentinel finds nothing relevant, it says so instead of guessing.
 - [Security](#security)
 - [Project structure](#project-structure)
 - [Data sources](#data-sources)
+- [Related projects](#related-projects)
 - [License](#license)
 
 ## Features
@@ -312,6 +314,14 @@ docs/           Architecture notes
 | CIS Controls v8 | Summaries adapted from the CIS Controls | CC BY-NC-SA 4.0 |
 
 For full details and attribution, see [corpus/SOURCES.md](corpus/SOURCES.md).
+
+## Related projects
+
+By [Aquib Haq](https://github.com/Clufy) · [clufy.github.io](https://clufy.github.io/)
+
+- [spanguard](https://github.com/Clufy/spanguard): PII/PHI detection and redaction for Python.
+- [voxbridge](https://github.com/Clufy/voxbridge): one Python SDK for Vapi and Retell voice agents.
+- [claude-code-gateway](https://github.com/Clufy/claude-code-gateway): run Claude Code on any LLM through a Cloudflare Worker.
 
 ## License
 
